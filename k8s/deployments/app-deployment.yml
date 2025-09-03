@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jagritnokwal-app
+  namespace: jagritnokwal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jagritnokwal
+  template:
+    metadata:
+      labels:
+        app: jagritnokwal
+    spec:
+      containers:
+        - name: jagritnokwal
+          image: jagritnokwal-site:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: REDIS_HOST
+              value: "redis"
+            - name: REDIS_PORT
+              value: "6379"
